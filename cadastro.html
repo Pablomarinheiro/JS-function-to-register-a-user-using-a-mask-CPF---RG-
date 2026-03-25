@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cadastro Pessoa</title>
+    <style>
+      *{
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        margin: auto 35%;
+        padding: 60px;
+
+      }
+      .required {
+        color: red;
+      }
+
+    </style>
+  </head>
+  <body>
+    <form
+      action="gravar_dados.php"
+      onsubmit="return validarSubmit();"
+      method="post"
+    >
+      <label for="nome">Nome : <span class="required">*</span></label>
+      <input type="text" id="nome" name="nome" placeholder="Nome Completo" />
+      <br />
+
+      <label for="endereco">Endereço :</label>
+      <input
+        type="text"
+        id="endereco"
+        name="endereco"
+        placeholder="Rua, Número, Apto"
+      /><br />
+
+      <label for="bairro">Bairro :</label>
+      <input type="text" id="bairro" name="bairro" /><br />
+
+      <label for="cidade">Cidade :</label>
+      <input type="text" id="cidade" name="cidade" /><br />
+
+      <label for="estado">Estado :</label>
+      <input
+        type="text"
+        id="estado"
+        name="estado"
+        maxlength="2"
+        placeholder="UF"
+      /><br />
+
+      <label for="profissao">Profissão :</label>
+      <input type="text" id="profissao" name="profissao" /><br />
+
+      <label for="cpf">CPF :<span class="required">*</span></label>
+      <input
+        type="text"
+        id="cpf"
+        name="cpf"
+        placeholder="000.000.000-00"
+      /><br />
+
+      <label for="rg">RG :<span class="required">*</span></label>
+      <input type="text" id="rg" name="rg" placeholder="00.000.000-0" /><br />
+
+      <label for="nascimento">
+        Data de Nascimento :<span class="required">*</span>
+      </label>
+      <input type="date" id="nascimento" name="nascimento" /><br />
+
+      <label for="estadoCivil">
+        Estado civíl :<span class="required">*</span>
+      </label>
+
+      <select name="estadoCivil" id="estadoCivil">
+        <option value="solteiro" selected>Solteiro</option>
+        <option value="casado">Casado</option>
+        <option value="separado">Separado</option>
+        <option value="divorciado">Divorciado</option>
+        <option value="viuvo">Viúvo</option>
+      </select>
+      <br />
+
+      <label for="casa">Casa :</label>
+      <select name="casa" id="casa">
+        <option value="propria" selected>Propria</option>
+        <option value="alugada">Alugada</option>
+        <option value="financiada">Financiada</option>
+        <option value="favor">Favor, não quero responder</option></select
+      ><br />
+
+      <input type="submit" value="Gravar" />
+    </form>
+    <script>
+      const cpfInput = document.getElementById("cpf");
+
+      cpfInput.addEventListener("input", (e) => {
+        let cpfValue = e.target.value;
+
+        cpfValue = cpfValue.replace(/\D/g, "");
+        cpfValue = cpfValue.substring(0, 11);
+
+        cpfValue = cpfValue.replace(/(\d{3})(\d)/, "$1.$2");
+        cpfValue = cpfValue.replace(/(\d{3})(\d)/, "$1.$2");
+        cpfValue = cpfValue.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+
+        e.target.value = cpfValue;
+      });
+
+      const rgInput = document.getElementById("rg");
+
+      rgInput.addEventListener("input", (e) => {
+        let rgValue = e.target.value;
+
+        rgValue = rgValue.replace(/\D/g, "");
+        rgValue = rgValue.substring(0, 9);
+
+        rgValue = rgValue.replace(/(\d{2})(\d)/, "$1.$2");
+        rgValue = rgValue.replace(/(\d{3})(\d)/, "$1.$2");
+        rgValue = rgValue.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+
+        e.target.value = rgValue;
+      });
+      function validarSubmit() {
+        const nome = document.getElementById("nome").value; //required
+        const endereco = document.getElementById("endereco").value;
+        const bairro = document.getElementById("bairro").value;
+        const cidade = document.getElementById("cidade").value;
+        const estado = document.getElementById("estado").value;
+        const profissao = document.getElementById("profissao").value;
+        const cpf = document.getElementById("cpf").value; //required
+        const rg = document.getElementById("rg").value; //required
+        const nascimento = document.getElementById("nascimento").value; //required
+        const estadoCivil = document.getElementById("estadoCivil").value; //required
+        const casa = document.getElementById("casa").value;
+
+       if (!nome) {
+          alert("Preencha o campo Nome");
+          return false;
+        }
+        if (!cpf) {
+          alert("Preencha o campo CPF");
+          return false;
+        }
+        if (!rg) {
+          alert("Preencha o campo RG");
+          return false;
+        }
+        if (!nascimento) {
+          alert("Preencha o campo Nascimento");
+          return false;
+        }
+        if (!estadoCivil) {
+          alert("Preencha o campo Estado Civil");
+          return false;
+        } else {
+          return true;
+        }
+      }
+    </script>
+  </body>
+</html>
