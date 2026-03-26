@@ -5,19 +5,81 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cadastro Pessoa</title>
     <style>
-      *{
+      :root {
+        --primary-color: #2f90ff;
+        --second-color: #f4f7f6;
+        --text-color: #333;
+        --background-color: #0077ff;
+        --error-color: #e74c3c;
+      }
+      * {
         margin: 0;
         padding: 0;
+        box-sizing: border-box;
       }
       body {
-        margin: auto 35%;
-        padding: 60px;
-
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: var(--second-color);
+        display: flex;
+        justify-content: center;
+        min-height: 100vh;
+        padding: 22px;
       }
       .required {
-        color: red;
+        color: var(--error-color);
+      }
+      form {
+        background: #ffff;
+        padding: 22px;
+        border-radius: 9px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        width: 100%;
+        max-width: 500px;
+      }
+      h2 {
+        text-align: center;
+        font-size: 25px;
+        margin-bottom: 10px;
+        color: var(--text-color);
+      }
+      p {
+        color: var(--text-color);
+        font-size: 10px;
+        opacity: 80%;
+        margin-bottom: 15px;
       }
 
+      label {
+        display: block;
+        margin-bottom: 3px;
+        font-weight: 550;
+        color: var(--text-color);
+        font-size: 15px;
+      }
+      input[type="text"],
+      input[type="date"],
+      select {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        cursor: pointer;
+      }
+      input[type="submit"] {
+        width: 100%;
+        text-align: center;
+        border: none;
+        border-radius: 9px;
+        padding: 8px;
+        color: var(--text-color);
+        font-weight: 600;
+        background-color: var(--primary-color);
+        cursor: pointer;
+      }
+      input[type="submit"]:hover {
+        transition: 0.3s ease-in;
+        color: var(--second-color);
+        background-color: var(--background-color);
+      }
     </style>
   </head>
   <body>
@@ -26,9 +88,10 @@
       onsubmit="return validarSubmit();"
       method="post"
     >
+      <h2>Cadastro de pessoas</h2>
+      <p>Informe todos os dados corretamente</p>
       <label for="nome">Nome : <span class="required">*</span></label>
       <input type="text" id="nome" name="nome" placeholder="Nome Completo" />
-      <br />
 
       <label for="endereco">Endereço :</label>
       <input
@@ -36,13 +99,13 @@
         id="endereco"
         name="endereco"
         placeholder="Rua, Número, Apto"
-      /><br />
+      />
 
       <label for="bairro">Bairro :</label>
-      <input type="text" id="bairro" name="bairro" /><br />
+      <input type="text" id="bairro" name="bairro" />
 
       <label for="cidade">Cidade :</label>
-      <input type="text" id="cidade" name="cidade" /><br />
+      <input type="text" id="cidade" name="cidade" />
 
       <label for="estado">Estado :</label>
       <input
@@ -51,26 +114,21 @@
         name="estado"
         maxlength="2"
         placeholder="UF"
-      /><br />
+      />
 
       <label for="profissao">Profissão :</label>
-      <input type="text" id="profissao" name="profissao" /><br />
+      <input type="text" id="profissao" name="profissao" />
 
       <label for="cpf">CPF :<span class="required">*</span></label>
-      <input
-        type="text"
-        id="cpf"
-        name="cpf"
-        placeholder="000.000.000-00"
-      /><br />
+      <input type="text" id="cpf" name="cpf" placeholder="000.000.000-00" />
 
       <label for="rg">RG :<span class="required">*</span></label>
-      <input type="text" id="rg" name="rg" placeholder="00.000.000-0" /><br />
+      <input type="text" id="rg" name="rg" placeholder="00.000.000-0" />
 
       <label for="nascimento">
         Data de Nascimento :<span class="required">*</span>
       </label>
-      <input type="date" id="nascimento" name="nascimento" /><br />
+      <input type="date" id="nascimento" name="nascimento" />
 
       <label for="estadoCivil">
         Estado civíl :<span class="required">*</span>
@@ -83,15 +141,14 @@
         <option value="divorciado">Divorciado</option>
         <option value="viuvo">Viúvo</option>
       </select>
-      <br />
 
       <label for="casa">Casa :</label>
       <select name="casa" id="casa">
         <option value="propria" selected>Propria</option>
         <option value="alugada">Alugada</option>
         <option value="financiada">Financiada</option>
-        <option value="favor">Favor, não quero responder</option></select
-      ><br />
+        <option value="favor">Favor, não quero responder</option>
+      </select>
 
       <input type="submit" value="Gravar" />
     </form>
@@ -126,19 +183,19 @@
         e.target.value = rgValue;
       });
       function validarSubmit() {
-        const nome = document.getElementById("nome").value; //required
-        const endereco = document.getElementById("endereco").value;
-        const bairro = document.getElementById("bairro").value;
-        const cidade = document.getElementById("cidade").value;
-        const estado = document.getElementById("estado").value;
-        const profissao = document.getElementById("profissao").value;
-        const cpf = document.getElementById("cpf").value; //required
-        const rg = document.getElementById("rg").value; //required
-        const nascimento = document.getElementById("nascimento").value; //required
-        const estadoCivil = document.getElementById("estadoCivil").value; //required
-        const casa = document.getElementById("casa").value;
+        const nome = trim(document.getElementById("nome").value); //required
+        const endereco = trim(document.getElementById("endereco").value);
+        const bairro = trim(document.getElementById("bairro").value);
+        const cidade = trim(document.getElementById("cidade").value);
+        const estado = trim(document.getElementById("estado").value);
+        const profissao = trim(document.getElementById("profissao").value);
+        const cpf = trim(document.getElementById("cpf").value); //required
+        const rg = trim(document.getElementById("rg").value); //required
+        const nascimento = trim(document.getElementById("nascimento").value); //required
+        const estadoCivil = trim(document.getElementById("estadoCivil").value); //required
+        const casa = trim(document.getElementById("casa").value);
 
-       if (!nome) {
+        if (!nome) {
           alert("Preencha o campo Nome");
           return false;
         }
