@@ -183,17 +183,17 @@
         e.target.value = rgValue;
       });
       function validarSubmit() {
-        const nome = trim(document.getElementById("nome").value); //required
-        const endereco = trim(document.getElementById("endereco").value);
-        const bairro = trim(document.getElementById("bairro").value);
-        const cidade = trim(document.getElementById("cidade").value);
-        const estado = trim(document.getElementById("estado").value);
-        const profissao = trim(document.getElementById("profissao").value);
-        const cpf = trim(document.getElementById("cpf").value); //required
-        const rg = trim(document.getElementById("rg").value); //required
-        const nascimento = trim(document.getElementById("nascimento").value); //required
-        const estadoCivil = trim(document.getElementById("estadoCivil").value); //required
-        const casa = trim(document.getElementById("casa").value);
+        const nome = document.getElementById("nome").value; //required
+        const endereco = document.getElementById("endereco").value;
+        const bairro = document.getElementById("bairro").value;
+        const cidade = document.getElementById("cidade").value;
+        const estado = document.getElementById("estado").value;
+        const profissao = document.getElementById("profissao").value;
+        const cpf = document.getElementById("cpf").value; //required
+        const rg = document.getElementById("rg").value; //required
+        const nascimento = document.getElementById("nascimento").value; //required
+        const estadoCivil = document.getElementById("estadoCivil").value; //required
+        const casa = document.getElementById("casa").value;
 
         if (!nome) {
           alert("Preencha o campo Nome");
